@@ -46,13 +46,13 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:id="@+id/save"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/linearLayout2"
-        android:layout_marginLeft="80dp"
         android:layout_marginTop="16dp"
-        android:text="Button" />
+        android:text="Save" />
 
 </RelativeLayout>
