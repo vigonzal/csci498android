@@ -42,6 +42,5 @@ public class LunchList extends Activity {
         getMenuInflater().inflate(R.menu.activity_lunch_list, menu);
         return true;
     }
-
     
 }
