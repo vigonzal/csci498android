@@ -12,7 +12,9 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name: " />
+            android:text="Name: "
+            android:textColor="#ff0000"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/name"
@@ -33,6 +35,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ff0000"
             android:text="Address: " />
 
         <EditText
