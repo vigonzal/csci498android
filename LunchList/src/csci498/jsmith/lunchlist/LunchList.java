@@ -15,7 +15,6 @@ import android.widget.Spinner;
 public class LunchList extends Activity {
 	
 	List<Restaurant> model=new ArrayList<Restaurant>();
-	//List<Restaurant> model=new ArrayList<Restaurant>();
 	ArrayAdapter<Restaurant> RestaurantAdapter=null;
 	
 	@Override
