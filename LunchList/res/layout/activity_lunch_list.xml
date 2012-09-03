@@ -4,23 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:stretchColumns="1"
-    tools:context=".LunchList" 
-    >
+    tools:context=".LunchList" >
 
     <TableRow>
 
         <TextView android:text="Name:" />
 
-        <EditText android:id="@+id/name" 
-            android:inputType="textMultiLine|textNoSuggestions"/>
+        <EditText
+            android:id="@+id/name"
+            android:inputType="textMultiLine|textNoSuggestions" />
     </TableRow>
 
     <TableRow>
 
         <TextView android:text="Address:" />
 
-        <EditText android:id="@+id/addr" 
-            android:inputType="textMultiLine|textNoSuggestions"/>
+        <EditText
+            android:id="@+id/addr"
+            android:inputType="textMultiLine|textNoSuggestions" />
+
     </TableRow>
 
     <TableRow
@@ -33,6 +35,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Type: " />
+
+        <RadioGroup
+            android:id="@+id/types"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/take_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Take-Out" />
+
+            <RadioButton
+                android:id="@+id/sit_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sit-Down" />
+
+            <RadioButton
+                android:id="@+id/delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delivery" />
+        </RadioGroup>
 
     </TableRow>
 
