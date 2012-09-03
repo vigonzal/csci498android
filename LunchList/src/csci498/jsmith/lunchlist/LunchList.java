@@ -1,5 +1,8 @@
 package csci498.jsmith.lunchlist;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -9,11 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.support.v4.app.NavUtils;
-import android.widget.RadioGroup;
 
 public class LunchList extends Activity {
 	
-	Restaurant r = new Restaurant();
+	List<Restaurant> model = new ArrayList<Restaurant>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class LunchList extends Activity {
 		@Override
 		public void onClick(View v) {
 			
+			Restaurant r = new Restaurant();
+			
 			EditText name = (EditText)findViewById(R.id.name);
 			EditText address = (EditText)findViewById(R.id.addr);
 			
@@ -38,6 +42,8 @@ public class LunchList extends Activity {
 			r.setAddress(address.getText().toString());
 			
 			RadioGroup types = (RadioGroup)findViewById(R.id.types);
+			//^ Re done in Java v
+			
 			
 			switch (types.getCheckedRadioButtonId()){
 			case R.id.sit_down:
