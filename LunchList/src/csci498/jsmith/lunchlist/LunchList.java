@@ -3,21 +3,19 @@ package csci498.jsmith.lunchlist;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioGroup;
-import android.support.v4.app.NavUtils;
+import android.widget.Spinner;
 
 public class LunchList extends Activity {
 	
 	List<Restaurant> model=new ArrayList<Restaurant>();
+	//List<Restaurant> model=new ArrayList<Restaurant>();
 	ArrayAdapter<Restaurant> adapter=null;
 	
 	@Override
@@ -28,7 +26,7 @@ public class LunchList extends Activity {
 		setContentView(R.layout.activity_lunch_list);
 		Button save=(Button)findViewById(R.id.save);
 		save.setOnClickListener(onSave);
-		ListView list=(ListView)findViewById(R.id.restaurants);
+		Spinner list=(Spinner)findViewById(R.id.restaurants);
 		
 		adapter=new ArrayAdapter<Restaurant>(this,
 				android.R.layout.simple_list_item_1,
