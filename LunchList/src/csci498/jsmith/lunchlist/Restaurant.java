@@ -30,4 +30,8 @@ public class Restaurant {
 		this.address = address;
 	}
 	
+	public String toString(){
+		return(getName());
+	}
+	
 }
