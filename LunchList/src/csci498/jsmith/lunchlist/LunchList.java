@@ -29,7 +29,7 @@ public class LunchList extends Activity {
 		@Override
 		public void onClick(View v) {
 			EditText name = (EditText)findViewById(R.id.name);
-			EditText address = (EditText)findViewById(R.id.adr);
+			EditText address = (EditText)findViewById(R.id.addr);
 			
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());
