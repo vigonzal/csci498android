@@ -1,4 +1,4 @@
-package csci498.jsmith.lunchlist;
+package csci498.vigonzal.lunchlist;
 
 public class Restaurant {
 	
