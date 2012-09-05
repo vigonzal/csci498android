@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    >
+    android:layout_height="match_parent"
+    tools:context=".LunchList" >
 
     <TableLayout
         android:id="@+id/details"
@@ -14,36 +15,42 @@
 
         <TableRow>
 
-            <TextView android:text="Name:" />
+            <TextView android:text="@string/name" />
 
-            <EditText android:id="@+id/name" />
+            <EditText
+                android:id="@+id/name"
+                android:hint="@string/name_field" 
+                />
         </TableRow>
 
         <TableRow>
 
-            <TextView android:text="Address:" />
+            <TextView android:text="@string/address" />
 
-            <AutoCompleteTextView android:id="@+id/addr" />
+            <AutoCompleteTextView
+                android:id="@+id/addr"
+                android:completionHint=" "
+                android:textColor="@android:color/primary_text_light" />
         </TableRow>
 
         <TableRow>
 
-            <TextView android:text="Type:" />
+            <TextView android:text="@string/type" />
 
             <RadioGroup android:id="@+id/types" >
 
                 <RadioButton
                     android:id="@+id/take_out"
                     android:checked="true"
-                    android:text="Take-Out" />
+                    android:text="@string/take_out" />
 
                 <RadioButton
                     android:id="@+id/sit_down"
-                    android:text="Sit-Down" />
+                    android:text="@string/sit_down" />
 
                 <RadioButton
                     android:id="@+id/delivery"
-                    android:text="Delivery" />
+                    android:text="@string/delivery" />
             </RadioGroup>
         </TableRow>
 
@@ -51,7 +58,7 @@
             android:id="@+id/save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save" />
+            android:text="@string/save" />
     </TableLayout>
 
     <Spinner

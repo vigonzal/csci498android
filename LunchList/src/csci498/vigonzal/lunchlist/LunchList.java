@@ -3,9 +3,10 @@ package csci498.vigonzal.lunchlist;
 import java.util.ArrayList;
 import java.util.List;
 
-import csci498.jsmith.lunchlist.R;
+import csci498.vigonzal.lunchlist.R;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,9 +30,9 @@ public class LunchList extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_lunch_list);
-		Button save=(Button)findViewById(R.id.save);
+		Button save = (Button)findViewById(R.id.save);
 		save.setOnClickListener(onSave);
-		Spinner list=(Spinner)findViewById(R.id.restaurants);
+		Spinner list = (Spinner)findViewById(R.id.restaurants);
 		
 		RestaurantAdapter=new ArrayAdapter<Restaurant>(this,
 				android.R.layout.simple_list_item_1,
@@ -44,15 +45,15 @@ public class LunchList extends Activity {
 		
 		public void onClick(View v) {
 		
-			Restaurant r=new Restaurant();
+			Restaurant r = new Restaurant();
 			
-			EditText name=(EditText)findViewById(R.id.name);
-			EditText address=(EditText)findViewById(R.id.addr);
+			EditText name = (EditText)findViewById(R.id.name);
+			EditText address = (EditText)findViewById(R.id.addr);
 			
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());
 			
-			RadioGroup types=(RadioGroup)findViewById(R.id.types);
+			RadioGroup types = (RadioGroup)findViewById(R.id.types);
 			
 			switch (types.getCheckedRadioButtonId()) {
 			case R.id.sit_down:
@@ -82,20 +83,33 @@ public class LunchList extends Activity {
 		}
 		public View getView(int position, View convertView, ViewGroup parent){
 			
-			View row=convertView;
-			RestaurantHolder holder=null;
-			if (row==null) {
-			LayoutInflater inflater=getLayoutInflater();
-			row=inflater.inflate(R.layout.row, parent, false);
-			holder=new RestaurantHolder(row);
-			row.setTag(holder);
+			View row = convertView;
+			RestaurantHolder holder = null;
+
+			if (row == null) {
+				
+				LayoutInflater inflater = getLayoutInflater();
+				
+				row = inflater.inflate(R.layout.row, parent, false);
+				holder = new RestaurantHolder(row);
+				row.setTag(holder);
+				
 			}
 			else {
-			holder=(RestaurantHolder)row.getTag();
+				holder = (RestaurantHolder)row.getTag();
 			}
-			holder.populateFrom(model.get(position));
-			return(row);
 			
+			holder.populateFrom(model.get(position));
+			
+			return(row);
+
+		}
+		public View getItemViewType(){
+			return null;
+			
+		}
+		public int getViewTypeCount(){
+			return 0;
 		}
 		
 	}
@@ -118,12 +132,15 @@ public class LunchList extends Activity {
 			
 			if(r.getType().equals("sit_down")){
 				icon.setImageResource(R.drawable.ball_red);
+				name.setTextColor(Color.RED);
 			}
 			else if (r.getType().equals("take_out")) {
 				icon.setImageResource(R.drawable.ball_yellow);
+				name.setTextColor(Color.BLUE);
 			}
 			else {
 				icon.setImageResource(R.drawable.ball_green);
+				name.setTextColor(Color.GREEN);
 			}
 			
 		}
