@@ -82,30 +82,18 @@ public class LunchList extends Activity {
 		}
 		public View getView(int position, View convertView, ViewGroup parent){
 			
-			View row = convertView;
-			
-			if (row == null){
-				LayoutInflater inflater = getLayoutInflater();
-				
-				row = inflater.inflate(R.layout.row, null);
-			}
-			
-			Restaurant r = model.get(position);
-			
-			((TextView) row.findViewById(R.id.title)).setText(r.getName());
-			((TextView) row.findViewById(R.id.address)).setText(r.getAddress());
-			
-			ImageView icon = (ImageView)row.findViewById(R.id.icon);
-			
-			if (r.getType().equals("sit_down")) {
-				icon.setImageResource(R.drawable.ball_red);
-			}
-			else if (r.getType().equals("take_out")) {
-				icon.setImageResource(R.drawable.ball_yellow);
+			View row=convertView;
+			RestaurantHolder holder=null;
+			if (row==null) {
+			LayoutInflater inflater=getLayoutInflater();
+			row=inflater.inflate(R.layout.row, parent, false);
+			holder=new RestaurantHolder(row);
+			row.setTag(holder);
 			}
 			else {
-				icon.setImageResource(R.drawable.ball_green);
+			holder=(RestaurantHolder)row.getTag();
 			}
+			holder.populateFrom(model.get(position));
 			return(row);
 			
 		}
