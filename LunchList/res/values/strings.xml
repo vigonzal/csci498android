@@ -9,6 +9,7 @@
     <string name="save">Save!</string>
     <string name="name">Name: </string>
     <string name="name_field">Resaurant Name</string>
+    <string name="address_field">Street Address</string>
     <string name="address">Address: </string>
  	<string name="type">Type:</string>
 </resources>
