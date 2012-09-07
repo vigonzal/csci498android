@@ -1,7 +1,7 @@
 package csci498.vigonzal.lunchlist;
 
 import java.util.ArrayList;
-import android.widget.AdapterView
+import android.widget.AdapterView;
 import java.util.List;
 
 import android.app.TabActivity;
