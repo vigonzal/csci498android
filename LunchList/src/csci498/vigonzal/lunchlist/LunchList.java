@@ -3,9 +3,7 @@ package csci498.vigonzal.lunchlist;
 import java.util.ArrayList;
 import java.util.List;
 
-import csci498.vigonzal.lunchlist.R;
-
-import android.app.Activity;
+import android.app.TabActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,9 +15,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TabHost;
 import android.widget.TextView;
 
-public class LunchList extends Activity {
+@SuppressWarnings("deprecation")
+public class LunchList extends TabActivity {
 	
 	List<Restaurant> model=new ArrayList<Restaurant>();
 	ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
@@ -40,6 +40,18 @@ public class LunchList extends Activity {
 				model);
 		
 		list.setAdapter(RestaurantAdapter);
+		
+		TabHost.TabSpec spec=getTabHost().newTabSpec("tag1");
+		spec.setContent(R.id.restaurants);
+		spec.setIndicator("List", getResources()
+				.getDrawable(R.drawable.list));
+		getTabHost().addTab(spec);
+		spec=getTabHost().newTabSpec("tag2");
+		spec.setContent(R.id.details);
+		spec.setIndicator("Details", getResources()
+				.getDrawable(R.drawable.restaurant));
+		getTabHost().addTab(spec);
+		getTabHost().setCurrentTab(0);
 		
 	}
 	private View.OnClickListener onSave=new View.OnClickListener() {
