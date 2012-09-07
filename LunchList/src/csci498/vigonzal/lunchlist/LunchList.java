@@ -1,35 +1,35 @@
 package csci498.vigonzal.lunchlist;
 
-import java.util.ArrayList;
-import android.widget.AdapterView;
-import java.util.List;
-
 import android.app.TabActivity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
+import android.view.LayoutInflater;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @SuppressWarnings("deprecation")
 public class LunchList extends TabActivity {
 
-	List<Restaurant> model=new ArrayList<Restaurant>();
+	List<Restaurant> model = new ArrayList<Restaurant>();
 	ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 	RestaurantAdapter adapter = null;
+	
 	EditText name=null;
 	EditText address=null;
 	RadioGroup types=null;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
@@ -38,6 +38,7 @@ public class LunchList extends TabActivity {
 		setContentView(R.layout.activity_lunch_list);
 		
 		Button save = (Button)findViewById(R.id.save);
+		
 		name=(EditText)findViewById(R.id.name);
 		address=(EditText)findViewById(R.id.addr);
 		types=(RadioGroup)findViewById(R.id.types);
@@ -66,6 +67,7 @@ public class LunchList extends TabActivity {
 		list.setOnItemClickListener(onListClick);
 
 	}
+	
 	private View.OnClickListener onSave = new View.OnClickListener() {
 
 		public void onClick(View v) {
@@ -124,6 +126,7 @@ public class LunchList extends TabActivity {
 			return(row);
 
 		}
+		
 		public int getItemViewType(int position){
 
 			String type = restaurants.get(position).getType();
@@ -137,12 +140,11 @@ public class LunchList extends TabActivity {
 			}
 
 		}
+		
 		public int getViewTypeCount(){
 			return 3;
 		}
 	}
-
-
 
 	static class RestaurantHolder{
 
@@ -177,7 +179,7 @@ public class LunchList extends TabActivity {
 	}
 
 
-	private AdapterView.OnItemClickListener onListClick=new	AdapterView.OnItemClickListener() {
+	private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
 
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			
