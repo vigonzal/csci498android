@@ -1,6 +1,7 @@
 package csci498.vigonzal.lunchlist;
 
 import java.util.ArrayList;
+import android.widget.AdapterView
 import java.util.List;
 
 import android.app.TabActivity;
@@ -52,6 +53,7 @@ public class LunchList extends TabActivity {
 				.getDrawable(R.drawable.restaurant));
 		getTabHost().addTab(spec);
 		getTabHost().setCurrentTab(0);
+		list.setOnItemClickListener(onListClick);
 		
 	}
 	private View.OnClickListener onSave=new View.OnClickListener() {
@@ -171,5 +173,12 @@ public class LunchList extends TabActivity {
 		}
 		
 	}
+	private AdapterView.OnItemClickListener onListClick=new
+			AdapterView.OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent,
+			View view, int position,
+			long id) {
+			}
+			};
 	
 }
