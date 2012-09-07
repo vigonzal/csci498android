@@ -10,10 +10,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TabHost;
@@ -24,7 +26,7 @@ public class LunchList extends TabActivity {
 
 	List<Restaurant> model=new ArrayList<Restaurant>();
 	ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-	ArrayAdapter<Restaurant> RestaurantAdapter=null;
+	RestaurantAdapter adapter = null;
 	EditText name=null;
 	EditText address=null;
 	RadioGroup types=null;
@@ -34,29 +36,33 @@ public class LunchList extends TabActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_lunch_list);
+		
 		Button save = (Button)findViewById(R.id.save);
 		name=(EditText)findViewById(R.id.name);
 		address=(EditText)findViewById(R.id.addr);
 		types=(RadioGroup)findViewById(R.id.types);
 		
 		save.setOnClickListener(onSave);
-		Spinner list = (Spinner)findViewById(R.id.restaurants);
+		ListView list = (ListView)findViewById(R.id.restaurants);
 
-		RestaurantAdapter=new ArrayAdapter<Restaurant>(this, android.R.layout.simple_list_item_1, model);
-
-		list.setAdapter(RestaurantAdapter);
+		adapter = new RestaurantAdapter();
+		list.setAdapter(adapter);
 
 		TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
+		
 		spec.setContent(R.id.restaurants);
-		spec.setIndicator("List", getResources()
-				.getDrawable(R.drawable.list));
+		spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
+		
 		getTabHost().addTab(spec);
+		
 		spec = getTabHost().newTabSpec("tag2");
 		spec.setContent(R.id.details);
-		spec.setIndicator("Details", getResources()
-				.getDrawable(R.drawable.restaurant));
+		spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
+		
 		getTabHost().addTab(spec);
+		
 		getTabHost().setCurrentTab(0);
+		
 		list.setOnItemClickListener(onListClick);
 
 	}
@@ -66,13 +72,8 @@ public class LunchList extends TabActivity {
 
 			Restaurant r = new Restaurant();
 
-			EditText name = (EditText)findViewById(R.id.name);
-			EditText address = (EditText)findViewById(R.id.addr);
-
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());
-
-			RadioGroup types = (RadioGroup)findViewById(R.id.types);
 
 			switch (types.getCheckedRadioButtonId()) {
 			case R.id.sit_down:
@@ -87,7 +88,7 @@ public class LunchList extends TabActivity {
 
 			}
 
-			RestaurantAdapter.add(r);
+			adapter.add(r);
 
 		}
 
@@ -99,23 +100,20 @@ public class LunchList extends TabActivity {
 		private static final int ROW_TYPE_SIT_DOWN = 2;
 
 		public RestaurantAdapter() {
-
 			super(LunchList.this, android.R.layout.simple_list_item_1, model);
-
 		}
+
 		public View getView(int position, View convertView, ViewGroup parent){
 
 			View row = convertView;
 			RestaurantHolder holder = null;
 
 			if (row == null) {
-
 				LayoutInflater inflater = getLayoutInflater();
 
 				row = inflater.inflate(R.layout.row, parent, false);
 				holder = new RestaurantHolder(row);
 				row.setTag(holder);
-
 			}
 			else {
 				holder = (RestaurantHolder)row.getTag();
@@ -142,8 +140,10 @@ public class LunchList extends TabActivity {
 		public int getViewTypeCount(){
 			return 3;
 		}
-
 	}
+
+
+
 	static class RestaurantHolder{
 
 		private TextView name = null; 
@@ -173,15 +173,16 @@ public class LunchList extends TabActivity {
 				icon.setImageResource(R.drawable.ball_green);
 				name.setTextColor(Color.GREEN);
 			}
-
 		}
-
 	}
+
+
 	private AdapterView.OnItemClickListener onListClick=new	AdapterView.OnItemClickListener() {
 
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
-		{
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			
 			Restaurant r=model.get(position);
+			
 			name.setText(r.getName());
 			address.setText(r.getAddress());
 			
@@ -194,6 +195,8 @@ public class LunchList extends TabActivity {
 			else {
 				types.check(R.id.delivery);
 			}
+			
+			getTabHost().setCurrentTab(1);
 		}
 	};
 
