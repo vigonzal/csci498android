@@ -15,6 +15,9 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
+import android.widget.ViewSwitcher;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +41,7 @@ public class LunchList extends TabActivity {
 		setContentView(R.layout.activity_lunch_list);
 		
 		Button save = (Button)findViewById(R.id.save);
-		
+		Button flip = (Button)findViewById(R.id.save);
 		name=(EditText)findViewById(R.id.name);
 		address=(EditText)findViewById(R.id.addr);
 		types=(RadioGroup)findViewById(R.id.types);
@@ -48,8 +51,8 @@ public class LunchList extends TabActivity {
 
 		adapter = new RestaurantAdapter();
 		list.setAdapter(adapter);
-
-		TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
+		
+		ViewFlipper spec = (ViewFlipper)findViewById(R.id.);
 		
 		spec.setContent(R.id.restaurants);
 		spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
@@ -97,9 +100,6 @@ public class LunchList extends TabActivity {
 	};
 
 	class RestaurantAdapter extends ArrayAdapter<Restaurant> {
-//		private static final int ROW_TYPE_DELIVERY = 0;
-//		private static final int ROW_TYPE_TAKE_OUT = 1;
-//		private static final int ROW_TYPE_SIT_DOWN = 2;
 
 		public RestaurantAdapter() {
 			super(LunchList.this, android.R.layout.simple_list_item_1, model);
@@ -126,24 +126,6 @@ public class LunchList extends TabActivity {
 			return(row);
 
 		}
-//		
-//		public int getItemViewType(int position){
-//
-//			String type = restaurants.get(position).getType();
-//
-//			if (type == "delivery") {
-//				return ROW_TYPE_DELIVERY;
-//			} else if (type == "take_out") {
-//				return ROW_TYPE_TAKE_OUT;
-//			} else {
-//				return ROW_TYPE_SIT_DOWN;
-//			}
-//
-//		}
-//		
-//		public int getViewTypeCount(){
-//			return 3;
-//		}
 	}
 
 	static class RestaurantHolder{
