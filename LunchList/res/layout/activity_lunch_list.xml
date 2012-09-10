@@ -23,7 +23,9 @@
                 android:id="@+id/restaurants"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
+			<ScrollView 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content">
             <TableLayout
                 android:id="@+id/details"
                 android:layout_width="match_parent"
@@ -87,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/save" />
             </TableLayout>
+            </ScrollView>
         </FrameLayout>
     </LinearLayout>
 
