@@ -97,9 +97,9 @@ public class LunchList extends TabActivity {
 	};
 
 	class RestaurantAdapter extends ArrayAdapter<Restaurant> {
-		private static final int ROW_TYPE_DELIVERY = 0;
-		private static final int ROW_TYPE_TAKE_OUT = 1;
-		private static final int ROW_TYPE_SIT_DOWN = 2;
+//		private static final int ROW_TYPE_DELIVERY = 0;
+//		private static final int ROW_TYPE_TAKE_OUT = 1;
+//		private static final int ROW_TYPE_SIT_DOWN = 2;
 
 		public RestaurantAdapter() {
 			super(LunchList.this, android.R.layout.simple_list_item_1, model);
@@ -126,24 +126,24 @@ public class LunchList extends TabActivity {
 			return(row);
 
 		}
-		
-		public int getItemViewType(int position){
-
-			String type = restaurants.get(position).getType();
-
-			if (type == "delivery") {
-				return ROW_TYPE_DELIVERY;
-			} else if (type == "take_out") {
-				return ROW_TYPE_TAKE_OUT;
-			} else {
-				return ROW_TYPE_SIT_DOWN;
-			}
-
-		}
-		
-		public int getViewTypeCount(){
-			return 3;
-		}
+//		
+//		public int getItemViewType(int position){
+//
+//			String type = restaurants.get(position).getType();
+//
+//			if (type == "delivery") {
+//				return ROW_TYPE_DELIVERY;
+//			} else if (type == "take_out") {
+//				return ROW_TYPE_TAKE_OUT;
+//			} else {
+//				return ROW_TYPE_SIT_DOWN;
+//			}
+//
+//		}
+//		
+//		public int getViewTypeCount(){
+//			return 3;
+//		}
 	}
 
 	static class RestaurantHolder{
