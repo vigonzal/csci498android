@@ -67,9 +67,21 @@
                             android:id="@+id/delivery"
                             android:text="@string/delivery" />
                     </RadioGroup>
-                </TableRow>
+                </TableRow><TableRow>
 
-                <Button
+                    <TextView android:text="@string/note" />
+
+                    <EditText
+                        android:id="@+id/notes"
+                        android:hint="@string/notes_sect"
+                        android:gravity="top"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:maxWidth="200sp"
+                        android:scrollHorizontally="false"
+                        android:singleLine="false" />
+                </TableRow>
+				<Button
                     android:id="@+id/save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

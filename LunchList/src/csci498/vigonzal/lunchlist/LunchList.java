@@ -26,9 +26,10 @@ public class LunchList extends TabActivity {
 	ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 	RestaurantAdapter adapter = null;
 	
-	EditText name=null;
-	EditText address=null;
-	RadioGroup types=null;
+	EditText name = null;
+	EditText address = null;
+	EditText notes = null;
+	RadioGroup types = null;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,9 +40,11 @@ public class LunchList extends TabActivity {
 		
 		Button save = (Button)findViewById(R.id.save);
 		
-		name=(EditText)findViewById(R.id.name);
-		address=(EditText)findViewById(R.id.addr);
-		types=(RadioGroup)findViewById(R.id.types);
+		name = (EditText)findViewById(R.id.name);
+		address = (EditText)findViewById(R.id.addr);
+		notes = (EditText)findViewById(R.id.notes);
+		types = (RadioGroup)findViewById(R.id.types);
+		
 		
 		save.setOnClickListener(onSave);
 		ListView list = (ListView)findViewById(R.id.restaurants);
@@ -76,7 +79,8 @@ public class LunchList extends TabActivity {
 
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());
-
+			r.setNotes(notes.getText().toString());
+			
 			switch (types.getCheckedRadioButtonId()) {
 			case R.id.sit_down:
 				r.setType("sit_down");
@@ -97,9 +101,6 @@ public class LunchList extends TabActivity {
 	};
 
 	class RestaurantAdapter extends ArrayAdapter<Restaurant> {
-//		private static final int ROW_TYPE_DELIVERY = 0;
-//		private static final int ROW_TYPE_TAKE_OUT = 1;
-//		private static final int ROW_TYPE_SIT_DOWN = 2;
 
 		public RestaurantAdapter() {
 			super(LunchList.this, android.R.layout.simple_list_item_1, model);
@@ -126,24 +127,7 @@ public class LunchList extends TabActivity {
 			return(row);
 
 		}
-//		
-//		public int getItemViewType(int position){
-//
-//			String type = restaurants.get(position).getType();
-//
-//			if (type == "delivery") {
-//				return ROW_TYPE_DELIVERY;
-//			} else if (type == "take_out") {
-//				return ROW_TYPE_TAKE_OUT;
-//			} else {
-//				return ROW_TYPE_SIT_DOWN;
-//			}
-//
-//		}
-//		
-//		public int getViewTypeCount(){
-//			return 3;
-//		}
+
 	}
 
 	static class RestaurantHolder{
@@ -187,6 +171,7 @@ public class LunchList extends TabActivity {
 			
 			name.setText(r.getName());
 			address.setText(r.getAddress());
+			notes.setText(r.getNotes());
 			
 			if (r.getType().equals("sit_down")) {
 				types.check(R.id.sit_down);

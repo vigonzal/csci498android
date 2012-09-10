@@ -11,5 +11,7 @@
     <string name="name_field">Resaurant Name</string>
     <string name="address_field">Street Address</string>
     <string name="address">Address: </string>
- 	<string name="type">Type:</string>
+ 	<string name="type">Type: </string>
+ 	<string name="note">Notes: </string>
+ 	<string name="notes_sect">Extra Notes</string>
 </resources>
