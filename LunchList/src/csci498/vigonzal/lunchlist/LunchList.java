@@ -3,6 +3,8 @@ package csci498.vigonzal.lunchlist;
 import android.app.TabActivity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
@@ -186,5 +188,12 @@ public class LunchList extends TabActivity {
 			getTabHost().setCurrentTab(1);
 		}
 	};
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		
+		new MenuInflater(this).inflate(R.menu.option, menu);
+		return(super.onCreateOptionsMenu(menu));
+		
+	}
 
 }
