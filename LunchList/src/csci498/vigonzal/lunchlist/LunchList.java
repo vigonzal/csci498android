@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Toast;
 import android.widget.ArrayAdapter;
@@ -22,25 +23,28 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.protocol.RequestContent;
+
 
 @SuppressWarnings("deprecation")
 public class LunchList extends TabActivity {
 
 	List<Restaurant> model = new ArrayList<Restaurant>();
 	ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-	RestaurantAdapter adapter = null;
 	
-	EditText name = null;
-	EditText address = null;
-	EditText notes = null;
-	RadioGroup types = null;
-	Restaurant current = null;
+	RestaurantAdapter adapter;
+	Restaurant current;
+	RadioGroup types;
+	EditText address;
+	EditText notes;
+	EditText name;
+	int progress;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-
+		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_lunch_list);
 		
 		Button save = (Button)findViewById(R.id.save);

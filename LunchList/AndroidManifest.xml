@@ -6,7 +6,10 @@
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="15" />
-    <supports-screens android:normalScreens="true" android:largeScreens="true" android:smallScreens="false"/>
+    <supports-screens 
+        android:normalScreens="true" 
+        android:largeScreens="true" 
+        android:smallScreens="false"/>
 
     <application
         android:debuggable="true"
