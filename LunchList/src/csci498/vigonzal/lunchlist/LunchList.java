@@ -3,6 +3,7 @@ package csci498.vigonzal.lunchlist;
 import android.app.TabActivity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuInflater;
@@ -218,5 +219,25 @@ public class LunchList extends TabActivity {
 		
 		return(super.onOptionsItemSelected(item));
 	}
+	
+	private void doSomeLongWork(final int incr){
+		
+		//note that this should be something more useful in the future.
+		SystemClock.sleep(250);
+		
+	}
+	
+	private Runnable longTask = new Runnable(){
+		
+		public void run(){
+			
+			for (int i = 0; i < 20; i++){
+				doSomeLongWork(500);
+				
+			}
+			
+		}
+		
+	};
 
 }
