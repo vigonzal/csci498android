@@ -32,10 +32,9 @@ import org.apache.http.protocol.RequestContent;
 public class LunchList extends TabActivity {
 
 	List<Restaurant> model = new ArrayList<Restaurant>();
-	ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 	
 	RestaurantAdapter adapter;
-	AtomicBoolean isActive;
+	AtomicBoolean isActive = new AtomicBoolean(true);
 	Restaurant current;
 	RadioGroup types;
 	EditText address;
@@ -219,9 +218,7 @@ public class LunchList extends TabActivity {
 			return(true);
 		}
 		else if (item.getItemId() == R.id.run){
-			setProgressBarVisibility(true);
-			progress = 0;
-			new Thread(longTask).start();
+			startWork();
 			
 			return true;
 		}
@@ -248,23 +245,30 @@ public class LunchList extends TabActivity {
 	}
 	
 	private Runnable longTask = new Runnable(){
-		
+
 		public void run(){
 			
 			for (int i = progress; i < 10000 && isActive.get(); i+=200){
 				doSomeLongWork(200);
-				
 			}
 			
-			runOnUiThread(new Runnable(){
-				public void run(){
-					setProgressBarVisibility(false);
-				}
-			});
-			
+			if(isActive.get()){
+				runOnUiThread(new Runnable(){
+					public void run(){
+						setProgressBarVisibility(false);
+						progress = 0;
+					}
+				});
+			}
 		}
-		
 	};
+	
+	private void startWork(){
+		
+		setProgressBarVisibility(true);
+		new Thread(longTask).start();
+		
+	}
 	
 	public void onPause(){
 		
@@ -274,15 +278,15 @@ public class LunchList extends TabActivity {
 		
 	}
 	
-//	public void onResume(){
-//		
-//		super.onResume();
-//		
-//		isActive.set(true);
-//		
-//		if(progress > 0){
-//			startWork();
-//		}
-//	}
+	public void onResume(){
+		
+		super.onResume();
+		
+		isActive.set(true);
+		
+		if(progress > 0){
+			startWork();
+		}
+	}
 
 }
