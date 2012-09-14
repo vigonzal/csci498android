@@ -240,7 +240,7 @@ public class LunchList extends TabActivity {
 			
 		});
 			
-		//note that this should be something more useful in the future.
+		//NOTE: This should be something more useful in the future.
 		SystemClock.sleep(250);
 		
 	}
@@ -249,8 +249,8 @@ public class LunchList extends TabActivity {
 		
 		public void run(){
 			
-			for (int i = 0; i < 20; i++){
-				doSomeLongWork(500);
+			for (int i = progress; i < 10000; i+=200){
+				doSomeLongWork(200);
 				
 			}
 			
