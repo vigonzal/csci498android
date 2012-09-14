@@ -216,6 +216,9 @@ public class LunchList extends TabActivity {
 			Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 			return(true);
 		}
+		else if (item.getItemId() == R.id.run){
+			new Thread(longTask).start();
+		}
 		
 		return(super.onOptionsItemSelected(item));
 	}
