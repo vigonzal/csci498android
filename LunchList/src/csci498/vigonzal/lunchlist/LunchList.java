@@ -23,6 +23,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.http.protocol.RequestContent;
 
@@ -34,6 +35,7 @@ public class LunchList extends TabActivity {
 	ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 	
 	RestaurantAdapter adapter;
+	AtomicBoolean isActive;
 	Restaurant current;
 	RadioGroup types;
 	EditText address;
@@ -249,7 +251,7 @@ public class LunchList extends TabActivity {
 		
 		public void run(){
 			
-			for (int i = progress; i < 10000; i+=200){
+			for (int i = progress; i < 10000 && isActive.get(); i+=200){
 				doSomeLongWork(200);
 				
 			}
@@ -263,5 +265,24 @@ public class LunchList extends TabActivity {
 		}
 		
 	};
+	
+	public void onPause(){
+		
+		super.onPause();
+		
+		isActive.set(false);
+		
+	}
+	
+//	public void onResume(){
+//		
+//		super.onResume();
+//		
+//		isActive.set(true);
+//		
+//		if(progress > 0){
+//			startWork();
+//		}
+//	}
 
 }
