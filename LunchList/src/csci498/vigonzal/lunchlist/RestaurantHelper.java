@@ -2,6 +2,7 @@ package csci498.vigonzal.lunchlist;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.widget.CursorAdapter;
 import android.database.SQLException;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteOpenHelper;
