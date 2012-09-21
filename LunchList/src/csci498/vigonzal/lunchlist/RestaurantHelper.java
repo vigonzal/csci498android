@@ -3,6 +3,7 @@ package csci498.vigonzal.lunchlist;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.content.ContentValues;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
@@ -29,5 +30,18 @@ class RestaurantHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		//only have one schema so it wont be needed until we have two.
+	}
+	
+	public void insert(String name, String address, String type, String notes){
+		
+		ContentValues cv = new ContentValues();
+		
+		cv.put("name", name);
+		cv.put("address", address);
+		cv.put("type", type);
+		cv.put("notes", notes);
+		
+		getWritableDatabase().insert("restaurants", "name", cv);
+		
 	}
 }
