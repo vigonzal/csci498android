@@ -34,6 +34,7 @@ public class LunchList extends TabActivity {
 	List<Restaurant> model = new ArrayList<Restaurant>();
 	
 	RestaurantAdapter adapter;
+	RestaurantHelper helper;
 	Restaurant current;
 	RadioGroup types;
 	EditText address;
@@ -47,6 +48,7 @@ public class LunchList extends TabActivity {
 		setContentView(R.layout.activity_lunch_list);
 		
 		Button save = (Button)findViewById(R.id.save);
+		helper = new RestaurantHelper(this);
 		
 		name = (EditText)findViewById(R.id.name);
 		address = (EditText)findViewById(R.id.addr);
@@ -194,5 +196,13 @@ public class LunchList extends TabActivity {
 			getTabHost().setCurrentTab(1);
 		}
 	};
+	
+	@Override
+	public void onDestroy(){
+		
+		super.onDestroy();
+		helper.close();
+		
+	}
 
 }
