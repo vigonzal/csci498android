@@ -35,7 +35,8 @@ import org.apache.http.protocol.RequestContent;
 
 @SuppressWarnings("deprecation")
 public class LunchList extends ListActivity {
-
+	
+	public final static String ID_EXTRA="csci498.vigonzal._ID";
 	Cursor model;
 	
 	RestaurantAdapter adapter;
@@ -59,33 +60,6 @@ public class LunchList extends ListActivity {
 
 	}
 	
-	private View.OnClickListener onSave = new View.OnClickListener() {
-
-		public void onClick(View v) {
-			
-			String type = null;
-			
-			switch (types.getCheckedRadioButtonId()) {
-			case R.id.sit_down:
-				type = "sit_down";
-				break;
-			case R.id.take_out:
-				type = "take_out";
-				break;
-			case R.id.delivery:
-				type = "delivery";
-				break;
-
-			}
-
-			helper.insert(name.getText().toString(), address.getText().toString(), 
-					type, notes.getText().toString());
-			
-			model.requery();
-
-		}
-
-	};
 
 	class RestaurantAdapter extends CursorAdapter {
 		
@@ -154,16 +128,14 @@ public class LunchList extends ListActivity {
 	}
 
 
-	private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
-
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			
-			Intent i =  new Intent(LunchList.this, DetailForm.class);
-			
-			startActivity(i);
-			
-		}
-	};
+	@Override
+	public void onListItemClick(ListView list, View view, int position, long id) {
+		
+		Intent i=new Intent(LunchList.this, DetailForm.class);
+		i.putExtra(ID_EXTRA, String.valueOf(id));
+		startActivity(i);
+		
+	}
 	
 	@Override
 	public void onDestroy(){
