@@ -128,7 +128,7 @@ public class LunchList extends ListActivity {
 	}
 
 
-	@Override
+
 	public void onListItemClick(ListView list, View view, int position, long id) {
 		
 		Intent i=new Intent(LunchList.this, DetailForm.class);
@@ -136,6 +136,20 @@ public class LunchList extends ListActivity {
 		startActivity(i);
 		
 	}
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		new MenuInflater(this).inflate(R.menu.option, menu);
+		return(super.onCreateOptionsMenu(menu));
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId()==R.id.add) {
+			tartActivity(new Intent(LunchList.this, DetailForm.class));
+			return(true);
+		}
+		return(super.onOptionsItemSelected(item));
+	}
+
 	
 	@Override
 	public void onDestroy(){
