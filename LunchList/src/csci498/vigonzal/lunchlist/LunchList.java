@@ -41,17 +41,14 @@ public class LunchList extends ListActivity {
 	
 	RestaurantAdapter adapter;
 	RestaurantHelper helper;
-	Restaurant current;
-	RadioGroup types;
-	EditText address;
-	EditText notes;
-	EditText name;
+
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
 		helper = new RestaurantHelper(this);
 		model = helper.getAll();
 		startManagingCursor(model);
@@ -132,22 +129,29 @@ public class LunchList extends ListActivity {
 	public void onListItemClick(ListView list, View view, int position, long id) {
 		
 		Intent i=new Intent(LunchList.this, DetailForm.class);
+		
 		i.putExtra(ID_EXTRA, String.valueOf(id));
 		startActivity(i);
 		
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
+		
 		new MenuInflater(this).inflate(R.menu.option, menu);
 		return(super.onCreateOptionsMenu(menu));
+		
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
+		
 		if (item.getItemId()==R.id.add) {
-			tartActivity(new Intent(LunchList.this, DetailForm.class));
+			startActivity(new Intent(LunchList.this, DetailForm.class));
+			
 			return(true);
 		}
+		
 		return(super.onOptionsItemSelected(item));
+		
 	}
 
 	
