@@ -47,7 +47,7 @@ public class LunchList extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.activity_lunch_list);
 		
 		helper = new RestaurantHelper(this);
 		model = helper.getAll();
