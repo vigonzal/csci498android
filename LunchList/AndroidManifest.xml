@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme" >
         
         <activity
-            android:name="csci498.vigonzal.lunchlist.LunchList"
+            android:name=".LunchList"
             android:label="@string/title_activity_lunch_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,10 +27,12 @@
             </intent-filter>
         </activity>
         
-        <activity 
-            android:name=".DetailForm">
+        <activity android:name=".DetailForm">
         </activity>
         
+        <activity android:name=".EditPreferences">
+        </activity>
+
     </application>
 
 </manifest>
