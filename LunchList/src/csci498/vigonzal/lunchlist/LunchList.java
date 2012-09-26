@@ -29,7 +29,7 @@ public class LunchList extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_lunch_list);
+		setContentView(R.layout.main);
 		
 		helper = new RestaurantHelper(this);
 		model = helper.getAll();
@@ -56,10 +56,14 @@ public class LunchList extends ListActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.add) {
 			startActivity(new Intent(LunchList.this, DetailForm.class));
 			return true;
+		}else if (item.getItemId()==R.id.prefs) {
+			startActivity(new Intent(this, EditPreferences.class));
+			return(true);
 		}
 		
 		return super.onOptionsItemSelected(item);
