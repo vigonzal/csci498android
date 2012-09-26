@@ -5,11 +5,14 @@
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="15" />
+        android:targetSdkVersion="15" 
+    />
+    
     <supports-screens 
         android:normalScreens="true" 
         android:largeScreens="true" 
-        android:smallScreens="false"/>
+        android:smallScreens="false"
+    />
 
     <application
         android:debuggable="true"
@@ -21,13 +24,12 @@
             android:label="@string/title_activity_lunch_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity 
             android:name=".DetailForm">
-            
         </activity>
     </application>
 
