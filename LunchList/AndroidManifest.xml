@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme" >
         
         <activity
-            android:name="csci498.vigonzal.lunchlist"
+            android:name="csci498.vigonzal.lunchlist.LunchList"
             android:label="@string/title_activity_lunch_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
