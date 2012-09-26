@@ -2,16 +2,13 @@ package csci498.vigonzal.lunchlist;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.app.Activity;
 import android.database.Cursor;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
-public class DetailForm extends Activity{
+public class DetailForm extends Activity {
 	
 	EditText name;
 	EditText address;
@@ -21,37 +18,28 @@ public class DetailForm extends Activity{
 	String restaurantId;
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState){
-		
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.detail_form);
 		
 		helper = new RestaurantHelper(this);
-		
 		name = (EditText)findViewById(R.id.name);
 		address = (EditText)findViewById(R.id.addr);
 		notes = (EditText)findViewById(R.id.notes);
 		types = (RadioGroup)findViewById(R.id.types);
 		
 		Button save = (Button)findViewById(R.id.save);
-		
 		save.setOnClickListener(onSave);
-		
 		restaurantId=getIntent().getStringExtra(LunchList.ID_EXTRA);
 		
 		if (restaurantId!=null) {
-			
 			load();
-			
 		}
 		
 	}
 	
 	private View.OnClickListener onSave = new View.OnClickListener() {
-		
 		public void onClick(View v) {
-			
 			String type = null;
 			
 			switch (types.getCheckedRadioButtonId()) {
@@ -77,10 +65,8 @@ public class DetailForm extends Activity{
 		}
 	};
 
-	private void load() {
-		
+	private void load() {		
 		Cursor c = helper.getById(restaurantId);
-		
 		c.moveToFirst();
 		name.setText(helper.getName(c));
 		address.setText(helper.getAddress(c));
@@ -97,7 +83,6 @@ public class DetailForm extends Activity{
 		}
 		
 		c.close();
-		
 	}
 	
 	@Override
