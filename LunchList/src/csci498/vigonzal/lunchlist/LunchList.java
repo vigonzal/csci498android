@@ -16,12 +16,14 @@ import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 @SuppressWarnings("deprecation")
 public class LunchList extends ListActivity {
 	
 	public final static String ID_EXTRA="csci498.vigonzal._ID";
+	SharedPreferences prefs;
 	RestaurantAdapter adapter;
 	RestaurantHelper helper;
 	Cursor model;
@@ -31,8 +33,9 @@ public class LunchList extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		helper = new RestaurantHelper(this);
-		model = helper.getAll();
+		model = helper.getAll(prefs.getString("sort_order", "name"));
 		startManagingCursor(model);
 		adapter = new RestaurantAdapter(model);
 		setListAdapter(adapter);
