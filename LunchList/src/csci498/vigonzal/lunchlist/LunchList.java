@@ -33,13 +33,22 @@ public class LunchList extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		helper = new RestaurantHelper(this);
-		model = helper.getAll(prefs.getString("sort_order", "name"));
+		helper=new RestaurantHelper(this);
+		prefs=PreferenceManager.getDefaultSharedPreferences(this);
+		
+		initList();
+		prefs.registerOnSharedPreferenceChangeListener(prefListener);
+	}
+	private void initList() {
+		if (model!=null) {
+			stopManagingCursor(model);
+			model.close();
+		}
+		
+		model=helper.getAll(prefs.getString("sort_order", "name"));
 		startManagingCursor(model);
-		adapter = new RestaurantAdapter(model);
+		adapter=new RestaurantAdapter(model);
 		setListAdapter(adapter);
-
 	}
 
 	public void onListItemClick(ListView list, View view, int position, long id) {
@@ -92,6 +101,15 @@ public class LunchList extends ListActivity {
 			return row;
 		}
 	}
+	
+	private SharedPreferences.OnSharedPreferenceChangeListener prefListener = 
+			new SharedPreferences.OnSharedPreferenceChangeListener() {
+		public void onSharedPreferenceChanged(SharedPreferences sharedPrefs, String key) {
+			if (key.equals("sort_order")) {
+				initList();
+			}
+		}
+	};
 
 	static class RestaurantHolder {
 		private TextView name; 
