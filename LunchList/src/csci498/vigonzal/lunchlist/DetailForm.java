@@ -37,7 +37,10 @@ public class DetailForm extends Activity {
 		}
 		
 	}
-	
+	@Override
+	public void onSaveInstanceState(Bundle state){
+		super.onSaveInstanceState(state);
+	}
 	private View.OnClickListener onSave = new View.OnClickListener() {
 		public void onClick(View v) {
 			String type = null;
