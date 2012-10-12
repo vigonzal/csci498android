@@ -9,21 +9,25 @@
         android:stretchColumns="1" >
 
         <TableRow>
+
             <TextView android:text="@string/name" />
-            <EditText 
-                android:id="@+id/name" 
-                android:hint="@string/name_field"/>
+
+            <EditText android:id="@+id/name" 
+                	  android:hint="@string/name_field"/>
         </TableRow>
 
         <TableRow>
+
             <TextView android:text="@string/address" />
-            <EditText 
-                android:id="@+id/addr" 
-                android:hint="@string/address_field"/>
+
+            <EditText android:id="@+id/addr" 
+                	  android:hint="@string/address_field"/>
         </TableRow>
 
         <TableRow>
+
             <TextView android:text="@string/type" />
+
             <RadioGroup android:id="@+id/types" >
                 <RadioButton
                     android:id="@+id/take_out"
@@ -38,23 +42,24 @@
             </RadioGroup>
         </TableRow>
 
-        <TableRow>
-            <TextView android:text="@string/note" />
-            <EditText
-                android:id="@+id/notes"
-                android:gravity="top"
-                android:inputType="textMultiLine"
-                android:lines="2"
-                android:maxLines="2"
-                android:scrollHorizontally="false" />
-        </TableRow>
+        <EditText
+            android:id="@+id/notes"
+            android:gravity="top"
+            android:hint="@string/notes_sect"
+            android:inputType="textMultiLine"
+            android:lines="2"
+            android:maxLines="2"
+            android:scrollHorizontally="false" />
+
+        <EditText
+            android:id="@+id/feed"
+            android:hint="@string/feed_url" />
 
         <Button
             android:id="@+id/save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/save" />
-        
     </TableLayout>
 
 </ScrollView>

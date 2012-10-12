@@ -14,4 +14,5 @@
  	<string name="type">Type: </string>
  	<string name="note">Notes: </string>
  	<string name="notes_sect">Extra Notes</string>
+ 	<string name="feed_url">Feed URL</string>
 </resources>

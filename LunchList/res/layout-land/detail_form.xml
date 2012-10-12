@@ -5,8 +5,8 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:shrinkColumns="3"
-        android:stretchColumns="3" >
+        android:shrinkColumns="2"
+        android:stretchColumns="2" >
 
         <TableRow>
 
@@ -14,7 +14,7 @@
 
             <EditText
                 android:id="@+id/name"
-                android:layout_span="3" />
+                android:layout_span="2" />
         </TableRow>
 
         <TableRow>
@@ -23,7 +23,7 @@
 
             <EditText
                 android:id="@+id/addr"
-                android:layout_span="3" />
+                android:layout_span="2" />
         </TableRow>
 
         <TableRow>
@@ -46,8 +46,6 @@
                     android:text="Delivery" />
             </RadioGroup>
 
-            <TextView android:text="Notes:" />
-
             <LinearLayout android:orientation="vertical" >
 
                 <EditText
@@ -55,10 +53,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
+                    android:hint="Notes"
                     android:inputType="textMultiLine"
                     android:lines="2"
                     android:maxLines="2"
                     android:scrollHorizontally="false" />
+
+                <EditText
+                    android:id="@+id/feed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Feed URL" />
 
                 <Button
                     android:id="@+id/save"

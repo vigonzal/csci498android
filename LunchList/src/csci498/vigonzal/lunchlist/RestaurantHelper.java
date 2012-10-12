@@ -36,6 +36,7 @@ class RestaurantHelper extends SQLiteOpenHelper {
 		return getReadableDatabase().rawQuery("SELECT _id, name, address, type, notes, feed " +
 				"FROM restaurants WHERE _ID=?", args);
 	}
+	
 	public void update(String id, String name, String address, String type, String notes, String feed ) {
 		ContentValues cv = new ContentValues();
 		String[] args = {id};
