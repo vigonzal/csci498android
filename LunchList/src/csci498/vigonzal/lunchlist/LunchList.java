@@ -32,14 +32,12 @@ public class LunchList extends TabActivity {
 
 	List<Restaurant> model = new ArrayList<Restaurant>();
 	ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-	AtomicBoolean isActive = new AtomicBoolean(true);
 	RestaurantAdapter adapter;
 	Restaurant current;
 	RadioGroup types;
 	EditText address;
 	EditText notes;
 	EditText name;
-	int progress;
 	
 	private View.OnClickListener onSave = new View.OnClickListener() {
 		public void onClick(View v) {
@@ -63,6 +61,7 @@ public class LunchList extends TabActivity {
 		}
 	};
 	
+	
 	private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			current = model.get(position);
@@ -83,27 +82,10 @@ public class LunchList extends TabActivity {
 			getTabHost().setCurrentTab(1);
 		}
 	};
-	
-	private Runnable longTask = new Runnable() {
-		public void run(){
-			for (int i = progress; i < 10000 && isActive.get(); i +=200) {
-				doSomeLongWork(200);
-			}
-			if(isActive.get()){
-				runOnUiThread(new Runnable(){
-					public void run(){
-						setProgressBarVisibility(false);
-						progress = 0;
-					}
-				});
-			}
-		}
-	};
 	 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_lunch_list);
 		Button save = (Button)findViewById(R.id.save);
 		
@@ -129,62 +111,6 @@ public class LunchList extends TabActivity {
 		list.setOnItemClickListener(onListClick);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		new MenuInflater(this).inflate(R.menu.option, menu);
-		return(super.onCreateOptionsMenu(menu));
-	}
-	
-	public boolean onOptionsItemSelected(MenuItem item) {
-		
-		if (item.getItemId() == R.id.toast) {
-			String message = "No restaurant selected";
-			
-			if (current!= null) {
-				message = current.getNotes();
-			}
-			
-			Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-			return(true);
-		}
-		else if (item.getItemId() == R.id.run){
-			startWork();
-			return true;
-		}
-		return(super.onOptionsItemSelected(item));
-	}
-	
-	private void doSomeLongWork(final int incr) {
-		runOnUiThread(new Runnable() {
-			public void run() {
-				progress += incr;
-				setProgress(progress);
-			}
-		});
-		//note that this should be something more useful in the future.
-		SystemClock.sleep(250);
-	}
-	
-	private void startWork() {
-		setProgressBarVisibility(true);
-		new Thread(longTask).start();
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		isActive.set(false);
-	}
-	
-	@Override
-	public void onResume() {
-		super.onResume();
-		isActive.set(true);
-		if (progress>0) {
-			startWork();
-		}
-	}
-	
 	class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 		public RestaurantAdapter() {
 			super(LunchList.this, android.R.layout.simple_list_item_1, model);
