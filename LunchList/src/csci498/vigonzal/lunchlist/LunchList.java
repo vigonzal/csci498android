@@ -62,6 +62,7 @@ public class LunchList extends TabActivity {
 						  address.getText().toString(),
 						  type, 
 						  notes.getText().toString());
+			model.requery();
 		}
 	};
 	
@@ -86,18 +87,22 @@ public class LunchList extends TabActivity {
 		}
 	};
 	 
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lunch_list);
+		
 		Button save = (Button)findViewById(R.id.save);
 		
+		helper = new RestaurantHelper(this);
 		name = (EditText)findViewById(R.id.name);
 		address = (EditText)findViewById(R.id.addr);
 		notes = (EditText)findViewById(R.id.notes);
 		types = (RadioGroup)findViewById(R.id.types);
 		
 		save.setOnClickListener(onSave);
+		
 		ListView list = (ListView)findViewById(R.id.restaurants);
 		model = helper.getAll();
 		startManagingCursor(model);
@@ -105,12 +110,16 @@ public class LunchList extends TabActivity {
 		list.setAdapter(adapter);
 
 		TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
+		
 		spec.setContent(R.id.restaurants);
 		spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
+		
 		getTabHost().addTab(spec);
+		
 		spec = getTabHost().newTabSpec("tag2");
 		spec.setContent(R.id.details);
 		spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
+		
 		getTabHost().addTab(spec);
 		getTabHost().setCurrentTab(0);
 		list.setOnItemClickListener(onListClick);
