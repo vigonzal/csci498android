@@ -41,11 +41,9 @@ public class LunchList extends TabActivity {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_lunch_list);
-		
 		Button save = (Button)findViewById(R.id.save);
 		
 		name = (EditText)findViewById(R.id.name);
@@ -53,38 +51,26 @@ public class LunchList extends TabActivity {
 		notes = (EditText)findViewById(R.id.notes);
 		types = (RadioGroup)findViewById(R.id.types);
 		
-		
 		save.setOnClickListener(onSave);
 		ListView list = (ListView)findViewById(R.id.restaurants);
-
 		adapter = new RestaurantAdapter();
 		list.setAdapter(adapter);
 
 		TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
-		
 		spec.setContent(R.id.restaurants);
 		spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
-		
 		getTabHost().addTab(spec);
-		
 		spec = getTabHost().newTabSpec("tag2");
 		spec.setContent(R.id.details);
 		spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
-		
 		getTabHost().addTab(spec);
-		
 		getTabHost().setCurrentTab(0);
-		
 		list.setOnItemClickListener(onListClick);
-
 	}
 	
 	private View.OnClickListener onSave = new View.OnClickListener() {
-
 		public void onClick(View v) {
-
 			current = new Restaurant();
-
 			current.setName(name.getText().toString());
 			current.setAddress(address.getText().toString());
 			current.setNotes(notes.getText().toString());
@@ -99,23 +85,17 @@ public class LunchList extends TabActivity {
 			case R.id.delivery:
 				current.setType("delivery");
 				break;
-
 			}
-
 			adapter.add(current);
-
 		}
-
 	};
 
 	class RestaurantAdapter extends ArrayAdapter<Restaurant> {
-
 		public RestaurantAdapter() {
 			super(LunchList.this, android.R.layout.simple_list_item_1, model);
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent){
-
 			View row = convertView;
 			RestaurantHolder holder = null;
 
@@ -131,15 +111,11 @@ public class LunchList extends TabActivity {
 			}
 
 			holder.populateFrom(model.get(position));
-
 			return(row);
-
 		}
-
 	}
 
 	static class RestaurantHolder{
-
 		private TextView name = null; 
 		private TextView address = null;
 		private ImageView icon = null;
@@ -172,11 +148,8 @@ public class LunchList extends TabActivity {
 
 
 	private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
-
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			
 			current = model.get(position);
-			
 			name.setText(current.getName());
 			address.setText(current.getAddress());
 			notes.setText(current.getNotes());
@@ -194,12 +167,11 @@ public class LunchList extends TabActivity {
 			getTabHost().setCurrentTab(1);
 		}
 	};
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		
 		new MenuInflater(this).inflate(R.menu.option, menu);
 		return(super.onCreateOptionsMenu(menu));
-		
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -218,38 +190,28 @@ public class LunchList extends TabActivity {
 			setProgressBarVisibility(true);
 			progress = 0;
 			new Thread(longTask).start();
-			
 			return true;
 		}
-		
 		return(super.onOptionsItemSelected(item));
 	}
 	
 	private void doSomeLongWork(final int incr){
-		
 		runOnUiThread(new Runnable() {
-			
 			public void run() {
-				
 				progress += incr;
 				setProgress(progress);
-				
 			}
-			
 		});
-			
 		//note that this should be something more useful in the future.
 		SystemClock.sleep(250);
-		
 	}
 	
 	private Runnable longTask = new Runnable(){
-		
 		public void run(){
-			
-			for (int i = 0; i < 20; i++){
-				doSomeLongWork(500);
-				
+			for (int i=progress;
+					i<10000;
+					i+=200) {
+				doSomeLongWork(200);
 			}
 			
 			runOnUiThread(new Runnable(){
@@ -257,9 +219,7 @@ public class LunchList extends TabActivity {
 					setProgressBarVisibility(false);
 				}
 			});
-			
 		}
-		
 	};
 
 }
