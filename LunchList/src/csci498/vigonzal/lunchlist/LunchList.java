@@ -32,6 +32,7 @@ public class LunchList extends TabActivity {
 
 	List<Restaurant> model = new ArrayList<Restaurant>();
 	ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+	RestaurantHelper helper = new RestaurantHelper(this);
 	RestaurantAdapter adapter;
 	Restaurant current;
 	RadioGroup types;
@@ -60,7 +61,6 @@ public class LunchList extends TabActivity {
 			adapter.add(current);
 		}
 	};
-	
 	
 	private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -111,6 +111,12 @@ public class LunchList extends TabActivity {
 		list.setOnItemClickListener(onListClick);
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		helper.close();
+	}
+	
 	class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 		public RestaurantAdapter() {
 			super(LunchList.this, android.R.layout.simple_list_item_1, model);
