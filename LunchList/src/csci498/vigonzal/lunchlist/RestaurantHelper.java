@@ -1,5 +1,6 @@
 package csci498.vigonzal.lunchlist;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -28,4 +29,13 @@ class RestaurantHelper extends SQLiteOpenHelper {
 		// version exists
 	}
 
+	public void insert(String name, String address,
+			String type, String notes) {
+			ContentValues cv=new ContentValues();
+			cv.put("name", name);
+			cv.put("address", address);
+			cv.put("type", type);
+			cv.put("notes", notes);
+			getWritableDatabase().insert("restaurants", "name", cv);
+	}
 }
