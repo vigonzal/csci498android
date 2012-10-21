@@ -83,20 +83,22 @@ public class LunchList extends TabActivity {
 		}
 	};
 	
-	private Runnable longTask = new Runnable(){
+	private Runnable longTask = new Runnable() {
 		public void run(){
 			for (int i = progress; i < 10000 && isActive.get(); i +=200) {
 				doSomeLongWork(200);
 			}
-			
-			runOnUiThread(new Runnable(){
-				public void run(){
-					setProgressBarVisibility(false);
-				}
-			});
+			if(isActive.get()){
+				runOnUiThread(new Runnable(){
+					public void run(){
+						setProgressBarVisibility(false);
+						progress = 0;
+					}
+				});
+			}
 		}
 	};
-	
+	 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -145,15 +147,13 @@ public class LunchList extends TabActivity {
 			return(true);
 		}
 		else if (item.getItemId() == R.id.run){
-			setProgressBarVisibility(true);
-			progress = 0;
-			new Thread(longTask).start();
+			startWork();
 			return true;
 		}
 		return(super.onOptionsItemSelected(item));
 	}
 	
-	private void doSomeLongWork(final int incr){
+	private void doSomeLongWork(final int incr) {
 		runOnUiThread(new Runnable() {
 			public void run() {
 				progress += incr;
@@ -164,10 +164,24 @@ public class LunchList extends TabActivity {
 		SystemClock.sleep(250);
 	}
 	
+	private void startWork() {
+		setProgressBarVisibility(true);
+		new Thread(longTask).start();
+	}
+
 	@Override
 	public void onPause() {
 		super.onPause();
 		isActive.set(false);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		isActive.set(true);
+		if (progress>0) {
+			startWork();
+		}
 	}
 	
 	class RestaurantAdapter extends ArrayAdapter<Restaurant> {
@@ -195,7 +209,7 @@ public class LunchList extends TabActivity {
 		}
 	}
 
-	static class RestaurantHolder{
+	static class RestaurantHolder {
 		private TextView name = null; 
 		private TextView address = null;
 		private ImageView icon = null;
