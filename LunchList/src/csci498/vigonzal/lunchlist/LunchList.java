@@ -164,6 +164,12 @@ public class LunchList extends TabActivity {
 		SystemClock.sleep(250);
 	}
 	
+	@Override
+	public void onPause() {
+		super.onPause();
+		isActive.set(false);
+	}
+	
 	class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 		public RestaurantAdapter() {
 			super(LunchList.this, android.R.layout.simple_list_item_1, model);
