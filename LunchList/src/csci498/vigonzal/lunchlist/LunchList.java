@@ -1,6 +1,8 @@
 package csci498.vigonzal.lunchlist;
 
 import android.app.TabActivity;
+import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.CursorAdapter;
 import android.widget.Toast;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,7 +33,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @SuppressWarnings("deprecation")
 public class LunchList extends TabActivity {
 
-	List<Restaurant> model = new ArrayList<Restaurant>();
+	Cursor model;
 	ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 	RestaurantHelper helper = new RestaurantHelper(this);
 	RestaurantAdapter adapter;
@@ -96,7 +99,9 @@ public class LunchList extends TabActivity {
 		
 		save.setOnClickListener(onSave);
 		ListView list = (ListView)findViewById(R.id.restaurants);
-		adapter = new RestaurantAdapter();
+		model = helper.getAll();
+		startManagingCursor(model);
+		adapter = new RestaurantAdapter(model);
 		list.setAdapter(adapter);
 
 		TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
@@ -117,28 +122,24 @@ public class LunchList extends TabActivity {
 		helper.close();
 	}
 	
-	class RestaurantAdapter extends ArrayAdapter<Restaurant> {
-		public RestaurantAdapter() {
-			super(LunchList.this, android.R.layout.simple_list_item_1, model);
+	class RestaurantAdapter extends CursorAdapter {
+		RestaurantAdapter(Cursor c){
+			super(LunchList.this, c);
 		}
 
-		public View getView(int position, View convertView, ViewGroup parent){
-			View row = convertView;
-			RestaurantHolder holder = null;
-
-			if (row == null) {
-				LayoutInflater inflater = getLayoutInflater();
-
-				row = inflater.inflate(R.layout.row, parent, false);
-				holder = new RestaurantHolder(row);
-				row.setTag(holder);
-			}
-			else {
-				holder = (RestaurantHolder)row.getTag();
-			}
-
-			holder.populateFrom(model.get(position));
-			return(row);
+		@Override
+		public void bindView(View row, Context ctxt, Cursor c){
+			RestaurantHolder holder = (RestaurantHolder)row.getTag();
+			holder.populateFrom(c, helper);
+		}
+		
+		@Override
+		public View newView(Context ctxt, Cursor c, ViewGroup parent){
+			LayoutInflater inflater = getLayoutInflater();
+			View row = inflater.inflate(R.layout.row, parent, false);
+			RestaurantHolder holder = new RestaurantHolder(row);
+			row.setTag(holder);
+			return row;
 		}
 	}
 
@@ -153,16 +154,16 @@ public class LunchList extends TabActivity {
 			icon = (ImageView)row.findViewById(R.id.icon);
 		}
 
-		void populateFrom(Restaurant r){
+		void populateFrom(Cursor c, RestaurantHelper helper){
 
-			name.setText(r.getName());
-			address.setText(r.getAddress());
+			name.setText(helper.getName(c));
+			address.setText(helper.getAddress(c));
 
-			if(r.getType().equals("sit_down")){
+			if(helper.getType(c).equals("sit_down")){
 				icon.setImageResource(R.drawable.ball_red);
 				name.setTextColor(Color.RED);
 			}
-			else if (r.getType().equals("take_out")) {
+			else if (helper.getType(c).equals("take_out")) {
 				icon.setImageResource(R.drawable.ball_yellow);
 				name.setTextColor(Color.BLUE);
 			}

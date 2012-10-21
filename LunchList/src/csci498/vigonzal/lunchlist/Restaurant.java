@@ -2,17 +2,17 @@ package csci498.vigonzal.lunchlist;
 
 public class Restaurant {
 	
-	private String name = " ";
-	private String address = " ";
-	private String type = " ";
-	private String notes = " ";
+	private String name = "";
+	private String address = "";
+	private String type = "";
+	private String notes = "";
 	
-	public String getType(){
-		return(type);
+	public String getType() {
+		return type;
 	}
 	
-	public void setType(String type){
-		this.type=type;
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	public String getName() {
@@ -31,8 +31,8 @@ public class Restaurant {
 		this.address = address;
 	}
 	
-	public String toString(){
-		return(getName());
+	public String toString() {
+		return getName();
 	}
 
 	public String getNotes() {

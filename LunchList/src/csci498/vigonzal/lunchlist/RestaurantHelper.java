@@ -2,11 +2,9 @@ package csci498.vigonzal.lunchlist;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 class RestaurantHelper extends SQLiteOpenHelper {
 
@@ -45,19 +43,19 @@ class RestaurantHelper extends SQLiteOpenHelper {
 	}
 	
 	public String getName(Cursor c) {
-		return(c.getString(1));
+		return c.getString(1);
 	}
 	
 	public String getAddress(Cursor c) {
-		return(c.getString(2));
+		return c.getString(2);
 	}
 	
-	public String getType(Cursor c) {
-		return(c.getString(3));
+	public String getType(Cursor c) { 
+		return c.getString(3);
 	}
 	
 	public String getNotes(Cursor c) {
-		return(c.getString(4));
+		return c.getString(4);
 	}
-	
+
 }
