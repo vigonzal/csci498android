@@ -24,8 +24,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.protocol.RequestContent;
-
 
 @SuppressWarnings("deprecation")
 public class LunchList extends TabActivity {
