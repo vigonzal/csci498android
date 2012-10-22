@@ -36,24 +36,16 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class LunchList extends ListActivity {
 
 	Cursor model;
-	ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 	RestaurantHelper helper = new RestaurantHelper(this);
 	RestaurantAdapter adapter;
-	Restaurant current;
-	RadioGroup types;
-	EditText address;
-	EditText notes;
-	EditText name;
 	
 	public final static String ID_EXTRA = "apt.tutorial._ID";
 	
-	private AdapterView.OnItemClickListener onItemListClick = new AdapterView.OnItemClickListener() {
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			Intent i=new Intent(LunchList.this, DetailForm.class);
+	public void onListItemClick(ListView list, View view, int position, long id) {
+			Intent i = new Intent(LunchList.this, DetailForm.class);
 			i.putExtra(ID_EXTRA, String.valueOf(id));
-			startActivity(i);
-		}
-	};
+			startActivity(i);	
+	}
 	 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -83,7 +75,7 @@ public class LunchList extends ListActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId()==R.id.add) {
+		if (item.getItemId() == R.id.add) {
 			startActivity(new Intent(LunchList.this, DetailForm.class));
 			return(true);
 		}

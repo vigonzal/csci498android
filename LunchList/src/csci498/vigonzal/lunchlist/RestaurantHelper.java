@@ -37,6 +37,16 @@ class RestaurantHelper extends SQLiteOpenHelper {
 			getWritableDatabase().insert("restaurants", "name", cv);
 	}
 
+	public void update(String id, String name, String address, String type, String notes) {
+		ContentValues cv=new ContentValues();
+		String[] args={id};
+		cv.put("name", name);
+		cv.put("address", address);
+		cv.put("type", type);
+		cv.put("notes", notes);
+		getWritableDatabase().update("restaurants", cv, "_ID=?", args);
+	}
+	
 	public Cursor getAll(){
 		return getReadableDatabase().rawQuery("SELECT _id, name, address, type," +
 				" notes FROM restaurants ORDER BY name", null);
