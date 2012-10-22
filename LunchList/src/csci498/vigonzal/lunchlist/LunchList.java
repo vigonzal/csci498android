@@ -45,9 +45,12 @@ public class LunchList extends ListActivity {
 	EditText notes;
 	EditText name;
 	
-	private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
+	public final static String ID_EXTRA = "apt.tutorial._ID";
+	
+	private AdapterView.OnItemClickListener onItemListClick = new AdapterView.OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			Intent i=new Intent(LunchList.this, DetailForm.class);
+			i.putExtra(ID_EXTRA, String.valueOf(id));
 			startActivity(i);
 		}
 	};

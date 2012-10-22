@@ -13,11 +13,12 @@ import android.widget.TextView;
 
 public class DetailForm extends Activity {
 	
-	EditText name=null;
-	EditText address=null;
-	EditText notes=null;
-	RadioGroup types=null;
-	RestaurantHelper helper=null;
+	EditText name;
+	EditText address;
+	EditText notes;
+	RadioGroup types;
+	RestaurantHelper helper;
+	String restaurantId;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,11 @@ public class DetailForm extends Activity {
 		address=(EditText)findViewById(R.id.addr);
 		notes=(EditText)findViewById(R.id.notes);
 		types=(RadioGroup)findViewById(R.id.types);
+		
 		Button save=(Button)findViewById(R.id.save);
 		save.setOnClickListener(onSave);
+		
+		restaurantId = getIntent().getStringExtra(LunchList.ID_EXTRA);
 	}
 	
 	private View.OnClickListener onSave=new View.OnClickListener() {
