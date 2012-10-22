@@ -19,25 +19,8 @@ public class DetailForm extends Activity {
 	RadioGroup types;
 	RestaurantHelper helper;
 	String restaurantId;
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.detail_form);
-
-		helper=new RestaurantHelper(this);
-		name=(EditText)findViewById(R.id.name);
-		address=(EditText)findViewById(R.id.addr);
-		notes=(EditText)findViewById(R.id.notes);
-		types=(RadioGroup)findViewById(R.id.types);
-		
-		Button save=(Button)findViewById(R.id.save);
-		save.setOnClickListener(onSave);
-		
-		restaurantId = getIntent().getStringExtra(LunchList.ID_EXTRA);
-	}
 	
-	private View.OnClickListener onSave=new View.OnClickListener() {
+	private View.OnClickListener onSave = new View.OnClickListener() {
 		public void onClick(View v) {
 			String type = null;
 			switch (types.getCheckedRadioButtonId()) {
@@ -54,4 +37,48 @@ public class DetailForm extends Activity {
 		}
 	};
 	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.detail_form);
+
+		helper=new RestaurantHelper(this);
+		name=(EditText)findViewById(R.id.name);
+		address=(EditText)findViewById(R.id.addr);
+		notes=(EditText)findViewById(R.id.notes);
+		types=(RadioGroup)findViewById(R.id.types);
+		
+		Button save=(Button)findViewById(R.id.save);
+		save.setOnClickListener(onSave);
+		
+		restaurantId = getIntent().getStringExtra(LunchList.ID_EXTRA);
+		if (restaurantId!=null) {
+			load();
+		}
+	}
+		
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		helper.close();
+	}
+	
+	private void load() {
+		Cursor c=helper.getById(restaurantId);
+		c.moveToFirst();
+		name.setText(helper.getName(c));
+		address.setText(helper.getAddress(c));
+		notes.setText(helper.getNotes(c));
+		
+		if (helper.getType(c).equals("sit_down")) {
+			types.check(R.id.sit_down);
+		}
+		else if (helper.getType(c).equals("take_out")) {
+			types.check(R.id.take_out);
+		}
+		else {
+			types.check(R.id.delivery);
+		}
+		c.close();
+	}
 }
