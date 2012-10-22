@@ -8,7 +8,7 @@ public class DetailForm extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.DetailForm);
+		// setContentView(R.layout.detail_form);
 	}
 	
 }
