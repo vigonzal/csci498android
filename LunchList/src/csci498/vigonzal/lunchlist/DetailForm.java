@@ -55,17 +55,17 @@ public class DetailForm extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail_form);
 
-		helper=new RestaurantHelper(this);
-		name=(EditText)findViewById(R.id.name);
-		address=(EditText)findViewById(R.id.addr);
-		notes=(EditText)findViewById(R.id.notes);
-		types=(RadioGroup)findViewById(R.id.types);
+		helper = new RestaurantHelper(this);
+		name = (EditText)findViewById(R.id.name);
+		address = (EditText)findViewById(R.id.addr);
+		notes = (EditText)findViewById(R.id.notes);
+		types = (RadioGroup)findViewById(R.id.types);
 		
-		Button save=(Button)findViewById(R.id.save);
+		Button save = (Button)findViewById(R.id.save);
 		save.setOnClickListener(onSave);
 		
 		restaurantId = getIntent().getStringExtra(LunchList.ID_EXTRA);
-		if (restaurantId!=null) {
+		if (restaurantId != null) {
 			load();
 		}
 	}
@@ -77,7 +77,7 @@ public class DetailForm extends Activity {
 	}
 	
 	private void load() {
-		Cursor c=helper.getById(restaurantId);
+		Cursor c = helper.getById(restaurantId);
 		c.moveToFirst();
 		name.setText(helper.getName(c));
 		address.setText(helper.getAddress(c));
