@@ -49,7 +49,6 @@ public class DetailForm extends Activity {
 		}
 	};
 	
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,6 +73,11 @@ public class DetailForm extends Activity {
 	public void onDestroy() {
 		super.onDestroy();
 		helper.close();
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle state) {
+		super.onSaveInstanceState(state);
 	}
 	
 	private void load() {
