@@ -28,28 +28,33 @@ public class LunchList extends ListActivity {
 	RestaurantHelper helper = new RestaurantHelper(this);
 	RestaurantAdapter adapter;
 	SharedPreferences prefs;
-	
+
 	public final static String ID_EXTRA = "apt.tutorial._ID";
+
+	private SharedPreferences.OnSharedPreferenceChangeListener prefListener = 
+			new SharedPreferences.OnSharedPreferenceChangeListener() {
+		public void onSharedPreferenceChanged(SharedPreferences sharedPrefs, String key) {
+			if (key.equals("sort_order")) {
+				initList();
+			}
+		}
+	};
 	
 	public void onListItemClick(ListView list, View view, int position, long id) {
-			Intent i = new Intent(LunchList.this, DetailForm.class);
-			i.putExtra(ID_EXTRA, String.valueOf(id));
-			startActivity(i);	
+		Intent i = new Intent(LunchList.this, DetailForm.class);
+		i.putExtra(ID_EXTRA, String.valueOf(id));
+		startActivity(i);	
 	}
-	 
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-		prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		
-		helper= new RestaurantHelper(this);
-		model=helper.getAll(prefs.getString("sort_order", "name"));
-		startManagingCursor(model);
-		adapter = new RestaurantAdapter(model);
-		setListAdapter(adapter);
 
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		helper= new RestaurantHelper(this);
+		initList();
+		prefs.registerOnSharedPreferenceChangeListener(prefListener);
 	}
 
 	@Override
@@ -57,13 +62,24 @@ public class LunchList extends ListActivity {
 		super.onDestroy();
 		helper.close();
 	}
-	
+
+	private void initList() {
+		if (model != null) {
+			stopManagingCursor(model);
+			model.close();
+		}
+		model = helper.getAll(prefs.getString("sort_order", "name"));
+		startManagingCursor(model);
+		adapter = new RestaurantAdapter(model);
+		setListAdapter(adapter);
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		new MenuInflater(this).inflate(R.menu.option, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.add) {
@@ -75,7 +91,7 @@ public class LunchList extends ListActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	class RestaurantAdapter extends CursorAdapter {
 		RestaurantAdapter(Cursor c){
 			super(LunchList.this, c);
@@ -86,7 +102,7 @@ public class LunchList extends ListActivity {
 			RestaurantHolder holder = (RestaurantHolder)row.getTag();
 			holder.populateFrom(c, helper);
 		}
-		
+
 		@Override
 		public View newView(Context ctxt, Cursor c, ViewGroup parent){
 			LayoutInflater inflater = getLayoutInflater();
