@@ -1,34 +1,23 @@
 package csci498.vigonzal.lunchlist;
 
 import android.app.ListActivity;
-import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.SystemClock;
+import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.LayoutInflater;
-import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.CursorAdapter;
-import android.widget.Toast;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RadioGroup;
-import android.widget.TabHost;
 import android.widget.TextView;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 
 
@@ -38,6 +27,7 @@ public class LunchList extends ListActivity {
 	Cursor model;
 	RestaurantHelper helper = new RestaurantHelper(this);
 	RestaurantAdapter adapter;
+	SharedPreferences prefs;
 	
 	public final static String ID_EXTRA = "apt.tutorial._ID";
 	
@@ -52,9 +42,10 @@ public class LunchList extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		
 		helper= new RestaurantHelper(this);
-		model = helper.getAll();
+		model=helper.getAll(prefs.getString("sort_order", "name"));
 		startManagingCursor(model);
 		adapter = new RestaurantAdapter(model);
 		setListAdapter(adapter);
