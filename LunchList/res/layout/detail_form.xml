@@ -36,16 +36,18 @@
             </RadioGroup>
         </TableRow>
 
-        <TableRow>
-            <TextView android:text="Notes:" />
-            <EditText
+        <EditText
                 android:id="@+id/notes"
                 android:gravity="top"
                 android:inputType="textMultiLine"
                 android:lines="2"
                 android:maxLines="2"
-                android:scrollHorizontally="false" />
-        </TableRow>
+                android:scrollHorizontally="false" 
+                android:hint="@string/notes_sect"/>
+
+		<EditText 
+		    android:id="@+id/feed"
+			android:hint="Feed URL"/>           
 
         <Button
             android:id="@+id/save"
