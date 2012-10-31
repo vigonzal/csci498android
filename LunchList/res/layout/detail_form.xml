@@ -9,25 +9,18 @@
         android:stretchColumns="1" >
 
         <TableRow>
-
             <TextView android:text="Name:" />
-
             <EditText android:id="@+id/name" />
         </TableRow>
 
         <TableRow>
-
             <TextView android:text="Address:" />
-
             <EditText android:id="@+id/addr" />
         </TableRow>
 
         <TableRow>
-
             <TextView android:text="Type:" />
-
             <RadioGroup android:id="@+id/types" >
-
                 <RadioButton
                     android:id="@+id/take_out"
                     android:checked="true"
@@ -44,9 +37,7 @@
         </TableRow>
 
         <TableRow>
-
             <TextView android:text="Notes:" />
-
             <EditText
                 android:id="@+id/notes"
                 android:gravity="top"
