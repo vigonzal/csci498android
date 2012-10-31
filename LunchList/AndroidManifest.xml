@@ -28,5 +28,6 @@
         </activity>
         <activity android:name=".DetailForm"/>
        	<activity android:name=".EditPreferences"/>
+       	<activity android:name=".FeedActivity"></activity>
     </application>
 </manifest>
