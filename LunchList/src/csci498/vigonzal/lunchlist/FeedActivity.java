@@ -1,47 +1,46 @@
 package csci498.vigonzal.lunchlist;
 
 import java.util.Properties;
-
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
-
+import org.mcsoxford.rss.RSSFeed;
+import org.mcsoxford.rss.RSSReader;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.os.AsyncTask;
 import android.util.Log;
 
 public class FeedActivity extends ListActivity {
-	private static class FeedTask extends AsyncTask<String, Void, Void> {
-		private Exception e;
-		private FeedActivity activity;
-
+	private static class FeedTask extends AsyncTask<String, Void, RSSFeed> {
+		private RSSReader reader = new RSSReader();
+		private Exception e = null;
+		private FeedActivity activity = null;
 		FeedTask(FeedActivity activity) {
 			attach(activity);
 		}
-
-		public Void doInBackground(String... urls) {
+		void attach(FeedActivity activity) {
+			this.activity = activity;
+		}
+		void detach() {
+			this.activity = null;
+		}
+		@Override
+		public RSSFeed doInBackground(String... urls) {
+			RSSFeed result = null;
 			try {
-				Properties systemSettings=System.getProperties();
-				systemSettings.put("http.proxyHost", "your.proxy.host.here");
-				systemSettings.put("http.proxyPort", "8080"); // use actual proxy port
-				
-				DefaultHttpClient client = new DefaultHttpClient();
-				HttpGet getMethod = new HttpGet(urls[0]);
-				ResponseHandler<String> responseHandler = new BasicResponseHandler();
-				String responseBody = client.execute(getMethod,
-						responseHandler);
-				Log.d("FeedActivity", responseBody);
+				result = reader.load(urls[0]);
 			}
 			catch (Exception e) {
 				this.e = e;
 			}
-			return(null);
+			return result;
 		}
-		public void onPostExecute(Void unused) {
+		@Override
+		public void onPostExecute(RSSFeed feed) {
 			if (e == null) {
-				// TODO
+				activity.setFeed(feed);
 			}
 			else {
 				Log.e("LunchList", "Exception parsing feed", e);
@@ -51,11 +50,12 @@ public class FeedActivity extends ListActivity {
 	}
 
 	private void goBlooey(Throwable t) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder
-			.setTitle("Exception!")
-			.setMessage(t.toString())
-			.setPositiveButton("OK", null)
-			.show();
-	}
+	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	builder
+	.setTitle("Exception!")
+	.setMessage(t.toString())
+	.setPositiveButton("OK", null)
+	.show();
+}
+
 }
