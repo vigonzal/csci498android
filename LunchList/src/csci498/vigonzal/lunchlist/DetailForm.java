@@ -185,6 +185,11 @@ public class DetailForm extends Activity {
 			locMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, onLocationChange);
 			return true;
 		}
+		else if (item.getItemId() == R.id.map) {
+			Intent i = new Intent(this, RestaurantMap.class);
+			startActivity(i);
+			return true;
+		}
 
 		return super.onOptionsItemSelected(item);
 	}
