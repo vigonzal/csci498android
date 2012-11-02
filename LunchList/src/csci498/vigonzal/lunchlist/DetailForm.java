@@ -36,8 +36,8 @@ public class DetailForm extends Activity {
 					+ ", " + String.valueOf(fix.getLongitude()));
 			locMgr.removeUpdates(onLocationChange);
 			Toast
-				.makeText(DetailForm.this, "Location saved", Toast.LENGTH_LONG)
-				.show();
+			.makeText(DetailForm.this, "Location saved", Toast.LENGTH_LONG)
+			.show();
 		}
 		public void onProviderDisabled(String provider) {
 			// required for interface, not used
@@ -187,6 +187,14 @@ public class DetailForm extends Activity {
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		if (restaurantId == null) {
+			menu.findItem(R.id.location).setEnabled(false);
+		}
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	private boolean isNetworkAvailable() {
