@@ -150,10 +150,12 @@ public class DetailForm extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 	private boolean isNetworkAvailable() {
 		ConnectivityManager
-		cm=(ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
+		cm = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
 		NetworkInfo info = cm.getActiveNetworkInfo();
 		return info!=null;
 	}
+
 }

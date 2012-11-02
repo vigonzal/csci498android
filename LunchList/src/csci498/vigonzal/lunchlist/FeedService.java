@@ -42,4 +42,5 @@ public class FeedService extends IntentService {
 			Log.w("LunchList", "Exception sending results to activity", e);
 		}
 	}
+
 }
