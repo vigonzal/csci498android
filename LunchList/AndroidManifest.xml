@@ -29,5 +29,6 @@
         <activity android:name=".DetailForm"/>
        	<activity android:name=".EditPreferences"/>
        	<activity android:name=".FeedActivity"></activity>
+       	<service android:name=".FeedService"></service>
     </application>
 </manifest>
