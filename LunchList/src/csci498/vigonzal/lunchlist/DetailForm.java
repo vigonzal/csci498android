@@ -27,7 +27,7 @@ public class DetailForm extends Activity {
 	RadioGroup types;
 	RestaurantHelper helper;
 	String restaurantId;
-	LocationManager locMgr=null;
+	LocationManager locMgr;
 
 	LocationListener onLocationChange = new LocationListener() {
 		public void onLocationChanged(Location fix) {
@@ -193,6 +193,7 @@ public class DetailForm extends Activity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		if (restaurantId == null) {
 			menu.findItem(R.id.location).setEnabled(false);
+			menu.findItem(R.id.map).setEnabled(false);
 		}
 		return super.onPrepareOptionsMenu(menu);
 	}
