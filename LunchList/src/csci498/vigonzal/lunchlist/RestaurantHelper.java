@@ -69,7 +69,7 @@ class RestaurantHelper extends SQLiteOpenHelper {
 						"restaurants WHERE _ID=?", args));
 	}
 
-	public Cursor getAll(String orderBy){
+	public Cursor getAll(String orderBy) {
 		return getReadableDatabase().rawQuery("SELECT _id, name, address, type," +
 				" notes, feed, lat, lon FROM restaurants ORDER BY " + orderBy, null);
 	}
@@ -97,6 +97,7 @@ class RestaurantHelper extends SQLiteOpenHelper {
 	public double getLatitude(Cursor c) {
 		return c.getDouble(6);
 	}
+	
 	public double getLongitude(Cursor c) {
 		return c.getDouble(7);
 	}
