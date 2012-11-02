@@ -9,29 +9,22 @@
         android:stretchColumns="2" >
 
         <TableRow>
-
             <TextView android:text="Name:" />
-
             <EditText
                 android:id="@+id/name"
                 android:layout_span="2" />
         </TableRow>
 
         <TableRow>
-
             <TextView android:text="Address:" />
-
             <EditText
                 android:id="@+id/addr"
-                android:layout_span="3" />
+                android:layout_span="2" />
         </TableRow>
 
         <TableRow>
-
             <TextView android:text="Type:" />
-
             <RadioGroup android:id="@+id/types" >
-
                 <RadioButton
                     android:id="@+id/take_out"
                     android:checked="true"
@@ -47,17 +40,16 @@
             </RadioGroup>
 
             <LinearLayout android:orientation="vertical" >
-
                 <EditText
                     android:id="@+id/notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
+                    android:hint="Notes"
                     android:inputType="textMultiLine"
                     android:lines="2"
                     android:maxLines="2"
-                    android:scrollHorizontally="false"
-                    android:hint="@string/notes_sect" />
+                    android:scrollHorizontally="false" />
 
                 <EditText
                     android:id="@+id/feed"
@@ -65,11 +57,21 @@
                     android:layout_height="wrap_content"
                     android:hint="Feed URL" />
 
-                <Button
-                    android:id="@+id/save"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Save" />
+                    android:orientation="horizontal" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Location:" />
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(not set)" />
+                </LinearLayout>
             </LinearLayout>
         </TableRow>
     </TableLayout>
