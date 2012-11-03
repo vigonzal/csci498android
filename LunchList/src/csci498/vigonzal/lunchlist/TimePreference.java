@@ -10,8 +10,8 @@ import android.widget.TimePicker;
 
 public class TimePreference extends DialogPreference {
 	
-	private int lastHour=0;
-	private int lastMinute=0;
+	private int lastHour = 0;
+	private int lastMinute = 0;
 	private TimePicker picker=null;
 	
 	public static int getHour(String time) {
