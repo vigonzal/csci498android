@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <supports-screens 
         android:normalScreens="true" 
         android:largeScreens="true" 
@@ -33,5 +34,12 @@
        	<activity android:name=".FeedActivity"></activity>
        	<activity android:name=".RestaurantMap"></activity>
        	<service android:name=".FeedService"></service>
+       	<receiver
+            android:name=".OnBootReceiver"
+            android:enabled="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>
