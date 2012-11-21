@@ -4,10 +4,8 @@ import android.app.IntentService;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.widget.RemoteViews;
 
 public class WidgetService extends IntentService {
@@ -19,7 +17,7 @@ public class WidgetService extends IntentService {
 	@Override
 	public void onHandleIntent(Intent intent) {
 		ComponentName me = new ComponentName(this, AppWidget.class);
-		RemoteViews updateViews = new RemoteViews("apt.tutorial", R.layout.widget);
+		RemoteViews updateViews = new RemoteViews("csci498.vigonzal.lunchlist", R.layout.widget);
 		RestaurantHelper helper = new RestaurantHelper(this);
 		AppWidgetManager mgr = AppWidgetManager.getInstance(this);
 		
