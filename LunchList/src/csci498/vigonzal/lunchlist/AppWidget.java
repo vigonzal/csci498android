@@ -19,6 +19,7 @@ public class AppWidget extends AppWidgetProvider {
 			ctxt.startService(new Intent(ctxt, WidgetService.class));
 		}
 	}
+	@SuppressWarnings("deprecation")
 	public void onHCUpdate(Context ctxt, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 		for (int i = 0; i < appWidgetIds.length; i++) {
 			Intent svcIntent = new Intent(ctxt, ListWidgetService.class);
