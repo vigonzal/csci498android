@@ -28,7 +28,7 @@ public class LunchFragment extends ListFragment {
 	SharedPreferences prefs;
 	OnRestaurantListener listener;
 
-	public final static String ID_EXTRA = "apt.tutorial._ID";
+	public final static String ID_EXTRA = "csci498.vigonzal.lunchlist._ID";
 
 	private SharedPreferences.OnSharedPreferenceChangeListener prefListener = 
 			new SharedPreferences.OnSharedPreferenceChangeListener() {
