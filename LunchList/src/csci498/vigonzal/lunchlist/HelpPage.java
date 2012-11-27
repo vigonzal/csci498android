@@ -1,7 +1,6 @@
 package csci498.vigonzal.lunchlist;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
 
