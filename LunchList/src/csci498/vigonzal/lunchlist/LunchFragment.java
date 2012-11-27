@@ -39,7 +39,6 @@ public class LunchFragment extends ListFragment {
 		}
 	};
 
-	
 	public void onListItemClick(ListView list, View view, int position, long id) {
 		if (listener != null) {
 			listener.onRestaurantSelected(id);
